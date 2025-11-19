@@ -41,3 +41,9 @@ class ExtractInfo:
             feds_number = p.find_all('span', class_='badge badge--feds')
             feds_number_records = [t.get_text().strip() for t in feds_number]
         return feds_number_records
+
+    def get_doi_link(self, response):
+        for p in response:
+            doi_tag = p.find_all('strong', string="DOI")
+            doi_links = [doi.parent.get_text(strip=True).replace("DOI:", "").strip() for doi in doi_tag]
+        return doi_links
