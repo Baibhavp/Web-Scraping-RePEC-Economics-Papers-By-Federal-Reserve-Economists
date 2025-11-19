@@ -8,11 +8,15 @@ class ExtractInfo:
         titles = self.get_titles(response)
         authors = self.get_author_names(response)
 
-        self.records = []
-
-        for date, num, title, author in zip(dates, fed_numbers, titles, authors):
-            self.records.append([date, num, title, author])
-
+        self.records = [
+            {
+                "date" : date,
+                "fed_number": num,
+                "title": title,
+                "authors": author
+            }
+            for date,num,title,author in zip(dates, fed_numbers, titles, authors)
+        ]
 
     def get_titles(self, response):
         for p in response:

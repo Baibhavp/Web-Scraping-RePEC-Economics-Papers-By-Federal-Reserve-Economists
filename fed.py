@@ -12,10 +12,8 @@ page.encoding = page.apparent_encoding
 soup = BeautifulSoup(page.text, 'html.parser')
 
 results = soup.find_all('div', class_='col-xs-12 col-md-12 col-sm-12')
-#print(results)
-
 
 extract = ExtractInfo(results)
-print(extract.records)
 
+print(extract.records)
 
