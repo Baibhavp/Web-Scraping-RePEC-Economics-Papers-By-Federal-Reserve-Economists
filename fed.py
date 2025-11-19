@@ -15,6 +15,18 @@ results = soup.find_all('div', class_='col-xs-12 col-md-12 col-sm-12')
 
 extract = ExtractInfo(results)
 
-extract.get_doi_link(results)
+doi_links = extract.get_doi_link(results)
+
+
+# Testing to extract jel codes
+doi_url = doi_links[1]
+
+r = requests.get(doi_url)
+doi_page = BeautifulSoup(r.text, 'html.parser')
+
+pdf_url = doi_page.find('a', string="Full Paper")['href']
+
+full_pdf_link = "https://www.federalreserve.gov" + pdf_url
+print(full_pdf_link)
 
 
