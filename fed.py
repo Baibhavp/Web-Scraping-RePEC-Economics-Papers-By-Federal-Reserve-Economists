@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 from extraction import ExtractInfo
+import pandas as pd
 
 
 url = 'https://www.federalreserve.gov/econres/feds/2025.htm'
@@ -16,4 +17,10 @@ results = soup.find_all('div', class_='col-xs-12 col-md-12 col-sm-12')
 
 extract = ExtractInfo(results)
 
-print(extract.records)
+records = extract.records
+
+# Store in a dataframe
+df = pd.DataFrame(records)
+
+# Export dataframe into csv file
+df.to_csv("repec.csv")
