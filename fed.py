@@ -4,6 +4,9 @@ from bs4 import BeautifulSoup
 url = 'https://www.federalreserve.gov/econres/feds/2025.htm'
 
 page = requests.get(url)
+# Ensures correct format of encoding for unique characters
+# response.apparent_encoding scans the raw bytes (response.content) and tries to detect the most likely encoding.
+page.encoding = page.apparent_encoding
 
 soup = BeautifulSoup(page.text, 'html.parser')
 
@@ -26,4 +29,11 @@ for p in results:
     feds_number_records = [t.get_text().strip() for t in feds_number]
 
 print(feds_number_records)
+'''
+'''
+for p in results:
+    authors = p.find_all('div', class_='authors')
+    authors_records = [t.get_text() for t in authors]
+
+print(authors_records)
 '''
